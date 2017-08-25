@@ -1,9 +1,5 @@
 #!/bin/bash
 
-################################################################################
-# This is wrapper script for build.sh use from inside docker container
-################################################################################
-
 PKGNAME='ocs-url'
 
 PKGUSER='pkgbuilder'
