@@ -10,4 +10,4 @@ DISTFILES += \
     $${PWD}/archlinux/PKGBUILD \
     $${PWD}/snap/snapcraft.yaml \
     $${PWD}/snap/snap/gui/ocs-url.desktop \
-    $${PWD}/appimage/appimage-desktopintegration_ocs-url
+    $${PWD}/appimage/appimage.sh
