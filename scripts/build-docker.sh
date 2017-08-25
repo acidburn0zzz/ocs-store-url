@@ -112,14 +112,16 @@ build_snap() {
     transfer_file "$(find "${PROJDIR}/build_"*${BUILDTYPE} -type f -name "${PKGNAME}*.snap")"
 }
 
+build_flatpak() {
+    echo 'Not implemented yet'
+}
+
 build_appimage() {
     # docker-image: ubuntu:14.04
     apt update -qq
     apt -y install build-essential qt5-default libqt5svg5-dev qtdeclarative5-dev
-    apt -y install git fuse zsync desktop-file-utils
+    apt -y install git
     apt -y install curl
-
-    modprobe fuse
 
     useradd -m ${PKGUSER}
     export HOME="/home/${PKGUSER}"
@@ -140,9 +142,11 @@ elif [ "${BUILDTYPE}" = 'archlinux' ]; then
     build_archlinux
 elif [ "${BUILDTYPE}" = 'snap' ]; then
     build_snap
+elif [ "${BUILDTYPE}" = 'flatpak' ]; then
+    build_flatpak
 elif [ "${BUILDTYPE}" = 'appimage' ]; then
     build_appimage
 else
-    echo "sh $(basename "${0}") [ubuntu|fedora|archlinux|snap|appimage]"
+    echo "sh $(basename "${0}") [ubuntu|fedora|archlinux|snap|flatpak|appimage]"
     exit 1
 fi
