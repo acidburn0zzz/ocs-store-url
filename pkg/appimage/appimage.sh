@@ -13,3 +13,8 @@ chmod 755 linuxdeployqt.AppImage
 
 ./squashfs-root/AppRun ${PKGNAME}.AppDir/usr/share/applications/${PKGNAME}.desktop -bundle-non-qt-libs -no-translations -qmldir="app/qml"
 ./squashfs-root/AppRun ${PKGNAME}.AppDir/usr/share/applications/${PKGNAME}.desktop -appimage
+
+rm linuxdeployqt.AppImage
+rm -rf squashfs-root
+
+mv *.AppImage ${PKGNAME}-x86_64.AppImage
