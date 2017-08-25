@@ -1,5 +1,3 @@
-message("Please execute scripts/import.sh for build dependencies")
-
 TARGET = ocs-url
 
 TEMPLATE = app
