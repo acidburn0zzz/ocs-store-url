@@ -116,7 +116,7 @@ build_appimage() {
     # docker-image: ubuntu:14.04
     apt update -qq
     apt -y install build-essential qt5-default libqt5svg5-dev qtdeclarative5-dev
-    apt -y install git
+    apt -y install git qtdeclarative5-dev-tools
     apt -y install curl
 
     useradd -m ${PKGUSER}
