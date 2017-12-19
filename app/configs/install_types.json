@@ -1,6 +1,6 @@
 {
     "bin": {
-        "name": "Softwares",
+        "name": "Software",
         "destination": "$HOME/.local/bin",
         "generic_destination": "$APP_DATA/bin"
     },
