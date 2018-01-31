@@ -1,9 +1,5 @@
 #!/bin/bash
 
-################################################################################
-# This is wrapper script for build.sh use from inside docker container
-################################################################################
-
 PKGNAME='ocs-url'
 
 PKGUSER='pkgbuilder'
@@ -97,37 +93,15 @@ build_archlinux() {
 }
 
 build_snap() {
-    # docker-image: ubuntu:16.04
-    apt update -qq
-    apt -y install build-essential qt5-default libqt5svg5-dev qtdeclarative5-dev
-    apt -y install git snapcraft
-    apt -y install curl
+    echo 'Not implemented yet'
+}
 
-    useradd -m ${PKGUSER}
-    export HOME="/home/${PKGUSER}"
-    chown -R ${PKGUSER}:${PKGUSER} "${PROJDIR}"
-
-    su -c "sh "${BUILDSCRIPT}" ${BUILDTYPE}" ${PKGUSER}
-
-    transfer_file "$(find "${PROJDIR}/build_"*${BUILDTYPE} -type f -name "${PKGNAME}*.snap")"
+build_flatpak() {
+    echo 'Not implemented yet'
 }
 
 build_appimage() {
-    # docker-image: ubuntu:14.04
-    apt update -qq
-    apt -y install build-essential qt5-default libqt5svg5-dev qtdeclarative5-dev
-    apt -y install git fuse zsync desktop-file-utils
-    apt -y install curl
-
-    modprobe fuse
-
-    useradd -m ${PKGUSER}
-    export HOME="/home/${PKGUSER}"
-    chown -R ${PKGUSER}:${PKGUSER} "${PROJDIR}"
-
-    su -c "sh "${BUILDSCRIPT}" ${BUILDTYPE}" ${PKGUSER}
-
-    transfer_file "$(find "${PROJDIR}/build_"*${BUILDTYPE} -type f -name "${PKGNAME}*.AppImage")"
+    echo 'Not implemented yet'
 }
 
 if [ "${BUILDTYPE}" = 'ubuntu' ]; then
@@ -140,9 +114,11 @@ elif [ "${BUILDTYPE}" = 'archlinux' ]; then
     build_archlinux
 elif [ "${BUILDTYPE}" = 'snap' ]; then
     build_snap
+elif [ "${BUILDTYPE}" = 'flatpak' ]; then
+    build_flatpak
 elif [ "${BUILDTYPE}" = 'appimage' ]; then
     build_appimage
 else
-    echo "sh $(basename "${0}") [ubuntu|fedora|archlinux|snap|appimage]"
+    echo "sh $(basename "${0}") [ubuntu|fedora|archlinux|snap|flatpak|appimage]"
     exit 1
 fi

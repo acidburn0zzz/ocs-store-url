@@ -4,7 +4,7 @@
 	dh $@
 
 override_dh_auto_configure:
-	sh scripts/import.sh
+	sh scripts/prepare.sh
 	qmake PREFIX="/usr"
 
 override_dh_auto_install:

@@ -1,1 +1,1 @@
-include($${PWD}/qtlib/qtlib.pri)
+include($${PWD}/qtil/qtil.pri)
