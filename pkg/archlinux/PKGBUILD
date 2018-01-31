@@ -16,7 +16,7 @@ md5sums=() #autofill using updpkgsums
 prepare() {
     #cd "${pkgname}-release-${pkgver}"
     cd "${pkgname}"
-    sh scripts/import.sh
+    sh scripts/prepare.sh
 }
 
 build() {

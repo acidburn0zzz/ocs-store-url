@@ -18,7 +18,7 @@ An install helper program for items served on OpenCollaborationServices (OCS).
 %prep
 #%%autosetup -n %{name}-release-%{version}
 %autosetup -n %{name}
-sh scripts/import.sh
+sh scripts/prepare.sh
 
 %build
 %define debug_package %{nil}
