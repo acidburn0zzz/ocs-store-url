@@ -3,7 +3,7 @@
 #include <QObject>
 #include <QJsonObject>
 
-#include "qtlib_config.h"
+#include "qtil_config.h"
 
 class ConfigHandler : public QObject
 {
@@ -21,7 +21,7 @@ private:
     void importAppConfigInstallTypes();
     QString convertPathString(const QString &path) const;
 
-    qtlib::Config appConfig_;
+    qtil::Config appConfig_;
     QJsonObject appConfigApplication_;
     QJsonObject appConfigInstallTypes_;
 };
