@@ -67,15 +67,7 @@ build_archlinux() {
 }
 
 build_snap() {
-    cd "${PROJDIR}"
-    mkdir -p "${BUILDDIR}"
-    export_srcarchive "${SRCARCHIVE}"
-
-    tar -xzvf "${SRCARCHIVE}" -C "${BUILDDIR}"
-    cp "${PROJDIR}/pkg/snap/snapcraft.yaml" "${BUILDDIR}/${PKGNAME}"
-    cp -r "${PROJDIR}/pkg/snap/snap" "${BUILDDIR}/${PKGNAME}"
-    cd "${BUILDDIR}/${PKGNAME}"
-    snapcraft
+    echo 'Not implemented yet'
 }
 
 build_flatpak() {
@@ -83,14 +75,7 @@ build_flatpak() {
 }
 
 build_appimage() {
-    cd "${PROJDIR}"
-    mkdir -p "${BUILDDIR}"
-    export_srcarchive "${SRCARCHIVE}"
-
-    tar -xzvf "${SRCARCHIVE}" -C "${BUILDDIR}"
-    cp "${PROJDIR}/pkg/appimage/appimage.sh" "${BUILDDIR}/${PKGNAME}"
-    cd "${BUILDDIR}/${PKGNAME}"
-    sh appimage.sh
+    echo 'Not implemented yet'
 }
 
 if [ "${BUILDTYPE}" = 'ubuntu' ]; then

@@ -93,19 +93,7 @@ build_archlinux() {
 }
 
 build_snap() {
-    # docker-image: ubuntu:16.04
-    apt update -qq
-    apt -y install build-essential qt5-default libqt5svg5-dev qtdeclarative5-dev
-    apt -y install git snapcraft
-    apt -y install curl
-
-    useradd -m ${PKGUSER}
-    export HOME="/home/${PKGUSER}"
-    chown -R ${PKGUSER}:${PKGUSER} "${PROJDIR}"
-
-    su -c "sh "${BUILDSCRIPT}" ${BUILDTYPE}" ${PKGUSER}
-
-    transfer_file "$(find "${PROJDIR}/build_"*${BUILDTYPE} -type f -name "${PKGNAME}*.snap")"
+    echo 'Not implemented yet'
 }
 
 build_flatpak() {
@@ -113,19 +101,7 @@ build_flatpak() {
 }
 
 build_appimage() {
-    # docker-image: ubuntu:14.04
-    apt update -qq
-    apt -y install build-essential qt5-default libqt5svg5-dev qtdeclarative5-dev
-    apt -y install git qtdeclarative5-dev-tools
-    apt -y install curl
-
-    useradd -m ${PKGUSER}
-    export HOME="/home/${PKGUSER}"
-    chown -R ${PKGUSER}:${PKGUSER} "${PROJDIR}"
-
-    su -c "sh "${BUILDSCRIPT}" ${BUILDTYPE}" ${PKGUSER}
-
-    transfer_file "$(find "${PROJDIR}/build_"*${BUILDTYPE} -type f -name "${PKGNAME}*.AppImage")"
+    echo 'Not implemented yet'
 }
 
 if [ "${BUILDTYPE}" = 'ubuntu' ]; then
