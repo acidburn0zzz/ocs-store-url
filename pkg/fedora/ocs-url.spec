@@ -1,6 +1,6 @@
 Summary: OCS-URL
 Name: ocs-url
-Version: 3.0.2
+Version: 3.0.3
 Release: 1%{?dist}
 License: GPLv3+
 Group: Applications/Internet
@@ -38,6 +38,10 @@ make INSTALL_ROOT="%{buildroot}" install
 rm -rf %{buildroot}
 
 %changelog
+* Tue Feb 06 2018 Akira Ohgaki <akiraohgaki@gmail.com> - 3.0.3-1
+- Update library
+- Fix spelling
+
 * Fri Jun 23 2017 Akira Ohgaki <akiraohgaki@gmail.com> - 3.0.2-1
 - Add zh_TW translations (by s8321414)
 
