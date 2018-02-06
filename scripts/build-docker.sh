@@ -92,15 +92,15 @@ build_archlinux() {
     transfer_file "$(find "${PROJDIR}/build_"*${BUILDTYPE} -type f -name "${PKGNAME}*.pkg.tar.xz")"
 }
 
+build_appimage() {
+    echo 'Not implemented yet'
+}
+
 build_snap() {
     echo 'Not implemented yet'
 }
 
 build_flatpak() {
-    echo 'Not implemented yet'
-}
-
-build_appimage() {
     echo 'Not implemented yet'
 }
 
@@ -112,13 +112,13 @@ elif [ "${BUILDTYPE}" = 'opensuse' ]; then
     build_opensuse
 elif [ "${BUILDTYPE}" = 'archlinux' ]; then
     build_archlinux
+elif [ "${BUILDTYPE}" = 'appimage' ]; then
+    build_appimage
 elif [ "${BUILDTYPE}" = 'snap' ]; then
     build_snap
 elif [ "${BUILDTYPE}" = 'flatpak' ]; then
     build_flatpak
-elif [ "${BUILDTYPE}" = 'appimage' ]; then
-    build_appimage
 else
-    echo "sh $(basename "${0}") [ubuntu|fedora|archlinux|snap|flatpak|appimage]"
+    echo "sh $(basename "${0}") [ubuntu|fedora|archlinux|appimage|snap|flatpak]"
     exit 1
 fi
