@@ -1,3 +1,10 @@
+ocs-url (3.0.3-0ubuntu1) trusty; urgency=low
+
+  * Update library
+  * Fix spelling
+
+ -- Akira Ohgaki <akiraohgaki@gmail.com>  Tue, 06 Feb 2018 12:00:06 +0000
+
 ocs-url (3.0.2-0ubuntu1) trusty; urgency=low
 
   * Add zh_TW translations (by s8321414)
