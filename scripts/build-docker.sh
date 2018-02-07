@@ -20,74 +20,69 @@ transfer_file() {
     if [ -f "${filepath}" ]; then
         filename="$(basename "${filepath}")"
         echo "Uploading ${filename}" >> "${TRANSFERLOG}"
-        curl -T "${filepath}" "https://transfer.sh/${filename}" >> "${TRANSFERLOG}"
-        echo "" >> "${TRANSFERLOG}"
+        curl -fsSL -T "${filepath}" "https://transfer.sh/${filename}" >> "${TRANSFERLOG}"
+        echo '' >> "${TRANSFERLOG}"
     fi
 }
 
 build_ubuntu() {
     # docker-image: ubuntu:14.04
+
     apt update -qq
+    apt -y install curl git
     apt -y install build-essential qt5-default libqt5svg5-dev qtdeclarative5-dev
-    apt -y install git devscripts debhelper fakeroot
-    apt -y install curl
+    apt -y install devscripts debhelper fakeroot
 
     useradd -m ${PKGUSER}
-    export HOME="/home/${PKGUSER}"
     chown -R ${PKGUSER}:${PKGUSER} "${PROJDIR}"
 
-    su -c "sh "${BUILDSCRIPT}" ${BUILDTYPE}" ${PKGUSER}
+    su -c "export HOME=/home/${PKGUSER} && sh "${BUILDSCRIPT}" ${BUILDTYPE}" ${PKGUSER}
 
     transfer_file "$(find "${PROJDIR}/build_"*${BUILDTYPE} -type f -name "${PKGNAME}*.deb")"
 }
 
 build_fedora() {
     # docker-image: fedora:20
+
+    yum -y install curl git
     yum -y install make automake gcc gcc-c++ libtool qt5-qtbase-devel qt5-qtsvg-devel qt5-qtdeclarative-devel
-    yum -y install git rpm-build
-    yum -y install curl
-    # docker-image: fedora:22
-    #dnf -y install make automake gcc gcc-c++ libtool qt5-qtbase-devel qt5-qtsvg-devel qt5-qtdeclarative-devel
-    #dnf -y install git rpm-build
-    #dnf -y install curl
+    yum -y install rpm-build
 
     useradd -m ${PKGUSER}
-    export HOME="/home/${PKGUSER}"
     chown -R ${PKGUSER}:${PKGUSER} "${PROJDIR}"
 
-    su -c "sh "${BUILDSCRIPT}" ${BUILDTYPE}" ${PKGUSER}
+    su -c "export HOME=/home/${PKGUSER} && sh "${BUILDSCRIPT}" ${BUILDTYPE}" ${PKGUSER}
 
     transfer_file "$(find "${PROJDIR}/build_"*${BUILDTYPE} -type f -name "${PKGNAME}*.rpm")"
 }
 
 build_opensuse() {
     # docker-image: opensuse:42.1
+
     zypper --non-interactive refresh
+    zypper --non-interactive install curl git
     zypper --non-interactive install make automake gcc gcc-c++ libtool libqt5-qtbase-devel libqt5-qtsvg-devel libqt5-qtdeclarative-devel
-    zypper --non-interactive install git rpm-build
-    zypper --non-interactive install curl
+    zypper --non-interactive install rpm-build
 
     useradd -m ${PKGUSER}
-    export HOME="/home/${PKGUSER}"
     chown -R ${PKGUSER}:${PKGUSER} "${PROJDIR}"
 
-    su -c "sh "${BUILDSCRIPT}" ${BUILDTYPE}" ${PKGUSER}
+    su -c "export HOME=/home/${PKGUSER} && sh "${BUILDSCRIPT}" ${BUILDTYPE}" ${PKGUSER}
 
     transfer_file "$(find "${PROJDIR}/build_"*${BUILDTYPE} -type f -name "${PKGNAME}*.rpm")"
 }
 
 build_archlinux() {
     # docker-image: base/archlinux:latest
+
     pacman -Syu --noconfirm
+    pacman -S --noconfirm curl git
     pacman -S --noconfirm base-devel qt5-base qt5-svg qt5-declarative qt5-quickcontrols
-    pacman -S --noconfirm git
-    pacman -S --noconfirm curl
 
     useradd -m ${PKGUSER}
-    export HOME="/home/${PKGUSER}"
     chown -R ${PKGUSER}:${PKGUSER} "${PROJDIR}"
 
-    su -c "sh "${BUILDSCRIPT}" ${BUILDTYPE}" ${PKGUSER}
+    su -c "export HOME=/home/${PKGUSER} && sh "${BUILDSCRIPT}" ${BUILDTYPE}" ${PKGUSER}
 
     transfer_file "$(find "${PROJDIR}/build_"*${BUILDTYPE} -type f -name "${PKGNAME}*.pkg.tar.xz")"
 }

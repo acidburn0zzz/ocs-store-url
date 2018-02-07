@@ -25,7 +25,7 @@ build_ubuntu() {
     mkdir -p "${BUILDDIR}"
     export_srcarchive "${SRCARCHIVE}"
 
-    tar -xzvf "${SRCARCHIVE}" -C "${BUILDDIR}"
+    tar -xzf "${SRCARCHIVE}" -C "${BUILDDIR}"
     cp -r "${PROJDIR}/pkg/ubuntu/debian" "${BUILDDIR}/${PKGNAME}"
     cd "${BUILDDIR}/${PKGNAME}"
     debuild -uc -us -b
