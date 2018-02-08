@@ -6,75 +6,9 @@ USER='pkgbuilder'
 
 SCRIPT="${0}"
 
-FUNCTION=''
-if [ "${1}" ]; then
-    FUNCTION="${1}"
-fi
-
 PROJDIR="$(cd "$(dirname "${0}")/../" && pwd)"
 
-BUILDDIR="${PROJDIR}/build_${PKGNAME}_${FUNCTION}"
-
-export_srcarchive() {
-    filepath="${1}"
-    $(cd "${PROJDIR}" && git archive --prefix="${PKGNAME}/" --output="${filepath}" HEAD)
-}
-
-transfer_file() {
-    filepath="${1}"
-    if [ -f "${filepath}" ]; then
-        filename="$(basename "${filepath}")"
-        logfilepath="${PROJDIR}/transfer.log"
-        echo "Uploading ${filename}" >> "${logfilepath}"
-        curl -fsSL -T "${filepath}" "https://transfer.sh/${filename}" >> "${logfilepath}"
-        echo '' >> "${logfilepath}"
-    fi
-}
-
-build_ubuntu_deb() {
-    cd "${PROJDIR}"
-    mkdir -p "${BUILDDIR}"
-    export_srcarchive "${BUILDDIR}/${PKGNAME}.tar.gz"
-    tar -xzf "${BUILDDIR}/${PKGNAME}.tar.gz" -C "${BUILDDIR}"
-    cp -r "${PROJDIR}/pkg/ubuntu/debian" "${BUILDDIR}/${PKGNAME}"
-    cd "${BUILDDIR}/${PKGNAME}"
-    debuild -uc -us -b
-}
-
-build_fedora_rpm() {
-    cd "${PROJDIR}"
-    mkdir -p "${BUILDDIR}"
-    export_srcarchive "${BUILDDIR}/${PKGNAME}.tar.gz"
-
-    mkdir "${BUILDDIR}/SOURCES"
-    mkdir "${BUILDDIR}/SPECS"
-    mv "${BUILDDIR}/${PKGNAME}.tar.gz" "${BUILDDIR}/SOURCES"
-    cp "${PROJDIR}/pkg/fedora/${PKGNAME}.spec" "${BUILDDIR}/SPECS"
-    rpmbuild --define "_topdir ${BUILDDIR}" -bb "${BUILDDIR}/SPECS/${PKGNAME}.spec"
-}
-
-build_opensuse_rpm() {
-    cd "${PROJDIR}"
-    mkdir -p "${BUILDDIR}"
-    export_srcarchive "${BUILDDIR}/${PKGNAME}.tar.gz"
-
-    mkdir "${BUILDDIR}/SOURCES"
-    mkdir "${BUILDDIR}/SPECS"
-    mv "${BUILDDIR}/${PKGNAME}.tar.gz" "${BUILDDIR}/SOURCES"
-    cp "${PROJDIR}/pkg/opensuse/${PKGNAME}.spec" "${BUILDDIR}/SPECS"
-    rpmbuild --define "_topdir ${BUILDDIR}" -bb "${BUILDDIR}/SPECS/${PKGNAME}.spec"
-}
-
-build_archlinux_pkg() {
-    cd "${PROJDIR}"
-    mkdir -p "${BUILDDIR}"
-    export_srcarchive "${BUILDDIR}/${PKGNAME}.tar.gz"
-
-    cp "${PROJDIR}/pkg/archlinux/PKGBUILD" "${BUILDDIR}"
-    cd "${BUILDDIR}"
-    updpkgsums
-    makepkg -s
-}
+BUILDDIR="${PROJDIR}/build_${PKGNAME}"
 
 ci_ubuntu_deb() { # docker-image: ubuntu:14.04
     apt update -qq
@@ -90,6 +24,15 @@ ci_ubuntu_deb() { # docker-image: ubuntu:14.04
     transfer_file "$(find "${BUILDDIR}" -type f -name "${PKGNAME}*.deb")"
 }
 
+build_ubuntu_deb() {
+    mkdir -p "${BUILDDIR}"
+    export_srcarchive "${BUILDDIR}/${PKGNAME}.tar.gz"
+    tar -xzf "${BUILDDIR}/${PKGNAME}.tar.gz" -C "${BUILDDIR}"
+    cp -r "${PROJDIR}/pkg/ubuntu/debian" "${BUILDDIR}/${PKGNAME}"
+    cd "${BUILDDIR}/${PKGNAME}"
+    debuild -uc -us -b
+}
+
 ci_fedora_rpm() { # docker-image: fedora:20
     yum -y install curl git
     yum -y install make automake gcc gcc-c++ libtool qt5-qtbase-devel qt5-qtsvg-devel qt5-qtdeclarative-devel
@@ -100,9 +43,17 @@ ci_fedora_rpm() { # docker-image: fedora:20
 
     su -c "export HOME=/home/${USER} && sh "${SCRIPT}" build_fedora_rpm" ${USER}
 
-    transfer_file "$(find "${PROJDIR}/build_"*${FUNCTION} -type f -name "${PKGNAME}*.rpm")"
+    transfer_file "$(find "${BUILDDIR}" -type f -name "${PKGNAME}*.rpm")"
 }
 
+build_fedora_rpm() {
+    mkdir -p "${BUILDDIR}"
+    mkdir "${BUILDDIR}/SOURCES"
+    mkdir "${BUILDDIR}/SPECS"
+    export_srcarchive "${BUILDDIR}/SOURCES/${PKGNAME}.tar.gz"
+    cp "${PROJDIR}/pkg/fedora/${PKGNAME}.spec" "${BUILDDIR}/SPECS"
+    rpmbuild --define "_topdir ${BUILDDIR}" -bb "${BUILDDIR}/SPECS/${PKGNAME}.spec"
+}
 
 ci_opensuse_rpm() { # docker-image: opensuse:42.1
     zypper --non-interactive refresh
@@ -115,7 +66,16 @@ ci_opensuse_rpm() { # docker-image: opensuse:42.1
 
     su -c "export HOME=/home/${USER} && sh "${SCRIPT}" build_opensuse_rpm" ${USER}
 
-    transfer_file "$(find "${PROJDIR}/build_"*${FUNCTION} -type f -name "${PKGNAME}*.rpm")"
+    transfer_file "$(find "${BUILDDIR}" -type f -name "${PKGNAME}*.rpm")"
+}
+
+build_opensuse_rpm() {
+    mkdir -p "${BUILDDIR}"
+    mkdir "${BUILDDIR}/SOURCES"
+    mkdir "${BUILDDIR}/SPECS"
+    export_srcarchive "${BUILDDIR}/SOURCES/${PKGNAME}.tar.gz"
+    cp "${PROJDIR}/pkg/opensuse/${PKGNAME}.spec" "${BUILDDIR}/SPECS"
+    rpmbuild --define "_topdir ${BUILDDIR}" -bb "${BUILDDIR}/SPECS/${PKGNAME}.spec"
 }
 
 ci_archlinux_pkg() { # docker-image: base/archlinux:latest
@@ -128,7 +88,34 @@ ci_archlinux_pkg() { # docker-image: base/archlinux:latest
 
     su -c "export HOME=/home/${USER} && sh "${SCRIPT}" build_archlinux_pkg" ${USER}
 
-    transfer_file "$(find "${PROJDIR}/build_"*${FUNCTION} -type f -name "${PKGNAME}*.pkg.tar.xz")"
+    transfer_file "$(find "${BUILDDIR}" -type f -name "${PKGNAME}*.pkg.tar.xz")"
 }
 
-${FUNCTION}
+build_archlinux_pkg() {
+    mkdir -p "${BUILDDIR}"
+    export_srcarchive "${BUILDDIR}/${PKGNAME}.tar.gz"
+    cp "${PROJDIR}/pkg/archlinux/PKGBUILD" "${BUILDDIR}"
+    cd "${BUILDDIR}"
+    updpkgsums
+    makepkg -s
+}
+
+export_srcarchive() {
+    if [ "${1}" ]; then
+        $(cd "${PROJDIR}" && git archive --prefix="${PKGNAME}/" --output="${1}" HEAD)
+    fi
+}
+
+transfer_file() {
+    if [ -f "${1}" ]; then
+        filename="$(basename "${1}")"
+        transferlog="${PROJDIR}/transfer.log"
+        echo "Uploading ${filename}" >> "${transferlog}"
+        curl -fsSL -T "${1}" "https://transfer.sh/${filename}" >> "${transferlog}"
+        echo '' >> "${transferlog}"
+    fi
+}
+
+if [ "${1}" ]; then
+    ${1}
+fi
