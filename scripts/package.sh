@@ -17,7 +17,7 @@ ci_ubuntu_deb() { # docker-image: ubuntu:14.04
     apt -y install devscripts debhelper fakeroot
 
     useradd -m ${USER}
-    chown -R ${USER}:${USER} "${PROJDIR}"
+    chown -R ${USER} "${PROJDIR}"
 
     su -c "export HOME=/home/${USER} && sh "${SCRIPT}" build_ubuntu_deb" ${USER}
 
@@ -25,6 +25,7 @@ ci_ubuntu_deb() { # docker-image: ubuntu:14.04
 }
 
 build_ubuntu_deb() {
+    rm -rf "${BUILDDIR}"
     mkdir -p "${BUILDDIR}"
     export_srcarchive "${BUILDDIR}/${PKGNAME}.tar.gz"
     tar -xzf "${BUILDDIR}/${PKGNAME}.tar.gz" -C "${BUILDDIR}"
@@ -39,7 +40,7 @@ ci_fedora_rpm() { # docker-image: fedora:20
     yum -y install rpm-build
 
     useradd -m ${USER}
-    chown -R ${USER}:${USER} "${PROJDIR}"
+    chown -R ${USER} "${PROJDIR}"
 
     su -c "export HOME=/home/${USER} && sh "${SCRIPT}" build_fedora_rpm" ${USER}
 
@@ -47,6 +48,7 @@ ci_fedora_rpm() { # docker-image: fedora:20
 }
 
 build_fedora_rpm() {
+    rm -rf "${BUILDDIR}"
     mkdir -p "${BUILDDIR}"
     mkdir "${BUILDDIR}/SOURCES"
     mkdir "${BUILDDIR}/SPECS"
@@ -62,7 +64,7 @@ ci_opensuse_rpm() { # docker-image: opensuse:42.1
     zypper --non-interactive install rpm-build
 
     useradd -m ${USER}
-    chown -R ${USER}:${USER} "${PROJDIR}"
+    chown -R ${USER} "${PROJDIR}"
 
     su -c "export HOME=/home/${USER} && sh "${SCRIPT}" build_opensuse_rpm" ${USER}
 
@@ -70,6 +72,7 @@ ci_opensuse_rpm() { # docker-image: opensuse:42.1
 }
 
 build_opensuse_rpm() {
+    rm -rf "${BUILDDIR}"
     mkdir -p "${BUILDDIR}"
     mkdir "${BUILDDIR}/SOURCES"
     mkdir "${BUILDDIR}/SPECS"
@@ -84,7 +87,7 @@ ci_archlinux_pkg() { # docker-image: base/archlinux:latest
     pacman -S --noconfirm base-devel qt5-base qt5-svg qt5-declarative qt5-quickcontrols
 
     useradd -m ${USER}
-    chown -R ${USER}:${USER} "${PROJDIR}"
+    chown -R ${USER} "${PROJDIR}"
 
     su -c "export HOME=/home/${USER} && sh "${SCRIPT}" build_archlinux_pkg" ${USER}
 
@@ -92,6 +95,7 @@ ci_archlinux_pkg() { # docker-image: base/archlinux:latest
 }
 
 build_archlinux_pkg() {
+    rm -rf "${BUILDDIR}"
     mkdir -p "${BUILDDIR}"
     export_srcarchive "${BUILDDIR}/${PKGNAME}.tar.gz"
     cp "${PROJDIR}/pkg/archlinux/PKGBUILD" "${BUILDDIR}"
