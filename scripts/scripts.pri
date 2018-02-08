@@ -1,4 +1,3 @@
 DISTFILES += \
-    $${PWD}/build-docker.sh \
-    $${PWD}/build.sh \
+    $${PWD}/package.sh \
     $${PWD}/prepare.sh
