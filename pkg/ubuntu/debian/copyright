@@ -4,7 +4,7 @@ Upstream-Contact: Opendesktop.org <contact@opendesktop.org>
 Source: https://github.com/opendesktop/ocs-url
 
 Files: *
-Copyright: 2016-2017, Opendesktop.org
+Copyright: 2016-2018, Opendesktop.org
 License: GPL-3+
  On Debian systems, the full text of the GNU General Public License version 3
  can be found in the `/usr/share/common-licenses/GPL-3' file.

@@ -10,7 +10,7 @@ URL: https://github.com/opendesktop/ocs-url
 Source0: %{name}.tar.gz
 
 Requires: libQt5Svg5 >= 5.2.0, libqt5-qtquickcontrols >= 5.2.0
-BuildRequires: make, automake, gcc, gcc-c++, libtool, libqt5-qtbase-devel >= 5.2.0, libqt5-qtsvg-devel >= 5.2.0, libqt5-qtdeclarative-devel >= 5.2.0, git, rpm-build
+BuildRequires: git, make, automake, gcc, gcc-c++, libtool, libqt5-qtbase-devel >= 5.2.0, libqt5-qtsvg-devel >= 5.2.0, libqt5-qtdeclarative-devel >= 5.2.0, rpm-build
 
 %description
 An install helper program for items served on OpenCollaborationServices (OCS).
@@ -22,7 +22,7 @@ sh scripts/prepare.sh
 
 %build
 %define debug_package %{nil}
-qmake-qt5 PREFIX="/usr"
+qmake-qt5 PREFIX=/usr
 make
 
 %install
