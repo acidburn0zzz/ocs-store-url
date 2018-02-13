@@ -2,9 +2,9 @@
 
 PKGNAME='ocs-url'
 
-USER='pkgbuilder'
+PKGUSER='pkgbuilder'
 
-SCRIPT="${0}"
+PKGSCRIPT="${0}"
 
 PROJDIR="$(cd "$(dirname "${0}")/../" && pwd)"
 
@@ -16,10 +16,10 @@ ci_ubuntu_deb() { # docker-image: ubuntu:14.04
     apt -y install build-essential qt5-default libqt5svg5-dev qtdeclarative5-dev
     apt -y install devscripts debhelper fakeroot
 
-    useradd -m ${USER}
-    chown -R ${USER} "${PROJDIR}"
+    useradd -m ${PKGUSER}
+    chown -R ${PKGUSER} "${PROJDIR}"
 
-    su -c "export HOME=/home/${USER} && sh "${SCRIPT}" build_ubuntu_deb" ${USER}
+    su -c "export HOME=/home/${PKGUSER} && sh "${PKGSCRIPT}" build_ubuntu_deb" ${PKGUSER}
 
     transfer_file "$(find "${BUILDDIR}" -type f -name "${PKGNAME}*.deb")"
 }
@@ -39,10 +39,10 @@ ci_fedora_rpm() { # docker-image: fedora:20
     yum -y install make automake gcc gcc-c++ libtool qt5-qtbase-devel qt5-qtsvg-devel qt5-qtdeclarative-devel
     yum -y install rpm-build
 
-    useradd -m ${USER}
-    chown -R ${USER} "${PROJDIR}"
+    useradd -m ${PKGUSER}
+    chown -R ${PKGUSER} "${PROJDIR}"
 
-    su -c "export HOME=/home/${USER} && sh "${SCRIPT}" build_fedora_rpm" ${USER}
+    su -c "export HOME=/home/${PKGUSER} && sh "${PKGSCRIPT}" build_fedora_rpm" ${PKGUSER}
 
     transfer_file "$(find "${BUILDDIR}" -type f -name "${PKGNAME}*.rpm")"
 }
@@ -63,10 +63,10 @@ ci_opensuse_rpm() { # docker-image: opensuse:42.1
     zypper --non-interactive install make automake gcc gcc-c++ libtool libqt5-qtbase-devel libqt5-qtsvg-devel libqt5-qtdeclarative-devel
     zypper --non-interactive install rpm-build
 
-    useradd -m ${USER}
-    chown -R ${USER} "${PROJDIR}"
+    useradd -m ${PKGUSER}
+    chown -R ${PKGUSER} "${PROJDIR}"
 
-    su -c "export HOME=/home/${USER} && sh "${SCRIPT}" build_opensuse_rpm" ${USER}
+    su -c "export HOME=/home/${PKGUSER} && sh "${PKGSCRIPT}" build_opensuse_rpm" ${PKGUSER}
 
     transfer_file "$(find "${BUILDDIR}" -type f -name "${PKGNAME}*.rpm")"
 }
@@ -86,10 +86,10 @@ ci_archlinux_pkg() { # docker-image: base/archlinux:latest
     pacman -S --noconfirm curl git
     pacman -S --noconfirm base-devel qt5-base qt5-svg qt5-declarative qt5-quickcontrols
 
-    useradd -m ${USER}
-    chown -R ${USER} "${PROJDIR}"
+    useradd -m ${PKGUSER}
+    chown -R ${PKGUSER} "${PROJDIR}"
 
-    su -c "export HOME=/home/${USER} && sh "${SCRIPT}" build_archlinux_pkg" ${USER}
+    su -c "export HOME=/home/${PKGUSER} && sh "${PKGSCRIPT}" build_archlinux_pkg" ${PKGUSER}
 
     transfer_file "$(find "${BUILDDIR}" -type f -name "${PKGNAME}*.pkg.tar.xz")"
 }
