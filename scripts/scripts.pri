@@ -1,3 +1,3 @@
 DISTFILES += \
-    $${PWD}/package.sh \
-    $${PWD}/prepare.sh
+    $${PWD}/package \
+    $${PWD}/prepare
