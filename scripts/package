@@ -19,7 +19,7 @@ ci_ubuntu_deb() { # docker-image: ubuntu:14.04
     useradd -m ${PKGUSER}
     chown -R ${PKGUSER} "${PROJDIR}"
 
-    su -c "export HOME=/home/${PKGUSER} && sh "${PKGSCRIPT}" build_ubuntu_deb" ${PKGUSER}
+    su -c "export HOME=/home/${PKGUSER} && "${PKGSCRIPT}" build_ubuntu_deb" ${PKGUSER}
 
     transfer_file "$(find "${BUILDDIR}" -type f -name "${PKGNAME}*.deb")"
 }
@@ -42,7 +42,7 @@ ci_fedora_rpm() { # docker-image: fedora:20
     useradd -m ${PKGUSER}
     chown -R ${PKGUSER} "${PROJDIR}"
 
-    su -c "export HOME=/home/${PKGUSER} && sh "${PKGSCRIPT}" build_fedora_rpm" ${PKGUSER}
+    su -c "export HOME=/home/${PKGUSER} && "${PKGSCRIPT}" build_fedora_rpm" ${PKGUSER}
 
     transfer_file "$(find "${BUILDDIR}" -type f -name "${PKGNAME}*.rpm")"
 }
@@ -66,7 +66,7 @@ ci_opensuse_rpm() { # docker-image: opensuse:42.1
     useradd -m ${PKGUSER}
     chown -R ${PKGUSER} "${PROJDIR}"
 
-    su -c "export HOME=/home/${PKGUSER} && sh "${PKGSCRIPT}" build_opensuse_rpm" ${PKGUSER}
+    su -c "export HOME=/home/${PKGUSER} && "${PKGSCRIPT}" build_opensuse_rpm" ${PKGUSER}
 
     transfer_file "$(find "${BUILDDIR}" -type f -name "${PKGNAME}*.rpm")"
 }
@@ -89,7 +89,7 @@ ci_archlinux_pkg() { # docker-image: base/archlinux:latest
     useradd -m ${PKGUSER}
     chown -R ${PKGUSER} "${PROJDIR}"
 
-    su -c "export HOME=/home/${PKGUSER} && sh "${PKGSCRIPT}" build_archlinux_pkg" ${PKGUSER}
+    su -c "export HOME=/home/${PKGUSER} && "${PKGSCRIPT}" build_archlinux_pkg" ${PKGUSER}
 
     transfer_file "$(find "${BUILDDIR}" -type f -name "${PKGNAME}*.pkg.tar.xz")"
 }
