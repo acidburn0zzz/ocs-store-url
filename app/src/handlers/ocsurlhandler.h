@@ -3,7 +3,7 @@
 #include <QObject>
 #include <QJsonObject>
 
-namespace qtil {
+namespace Qtil {
 class NetworkResource;
 }
 
