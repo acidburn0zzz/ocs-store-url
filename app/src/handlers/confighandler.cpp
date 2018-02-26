@@ -8,7 +8,7 @@
 ConfigHandler::ConfigHandler(QObject *parent)
     : QObject(parent)
 {
-    appConfig_ = qtil::Config(":/configs");
+    appConfig_ = Qtil::Config(":/configs");
     importAppConfigApplication();
     importAppConfigInstallTypes();
 }
@@ -55,7 +55,7 @@ QString ConfigHandler::convertPathString(const QString &path) const
 {
     auto newPath = path;
     if (newPath.contains("$HOME")) {
-        newPath.replace("$HOME", qtil::Dir::homePath());
+        newPath.replace("$HOME", Qtil::Dir::homePath());
     }
     else if (newPath.contains("$XDG_DOCUMENTS_DIR")) {
         newPath.replace("$XDG_DOCUMENTS_DIR", QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
@@ -73,13 +73,13 @@ QString ConfigHandler::convertPathString(const QString &path) const
         newPath.replace("$XDG_VIDEOS_DIR", QStandardPaths::writableLocation(QStandardPaths::MoviesLocation));
     }
     else if (newPath.contains("$XDG_DATA_HOME")) {
-        newPath.replace("$XDG_DATA_HOME", qtil::Dir::genericDataPath());
+        newPath.replace("$XDG_DATA_HOME", Qtil::Dir::genericDataPath());
     }
     else if (newPath.contains("$KDEHOME")) {
-        newPath.replace("$KDEHOME", qtil::Dir::kdehomePath());
+        newPath.replace("$KDEHOME", Qtil::Dir::kdehomePath());
     }
     else if (newPath.contains("$APP_DATA")) {
-        newPath.replace("$APP_DATA", qtil::Dir::genericDataPath() + "/" + getAppConfigApplication()["id"].toString());
+        newPath.replace("$APP_DATA", Qtil::Dir::genericDataPath() + "/" + getAppConfigApplication()["id"].toString());
     }
     return newPath;
 }

@@ -31,12 +31,12 @@ public slots:
     void openDestination() const;
 
 private slots:
-    void networkResourceFinished(qtil::NetworkResource *resource);
+    void networkResourceFinished(Qtil::NetworkResource *resource);
 
 private:
     void parse();
-    void saveDownloadedFile(qtil::NetworkResource *resource);
-    void installDownloadedFile(qtil::NetworkResource *resource);
+    void saveDownloadedFile(Qtil::NetworkResource *resource);
+    void installDownloadedFile(Qtil::NetworkResource *resource);
 
     QString ocsUrl_;
     ConfigHandler *configHandler_;
