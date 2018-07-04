@@ -4,16 +4,16 @@ Version: 3.0.3
 Release: 1%{?dist}
 License: GPLv3+
 Group: Applications/Internet
-URL: https://github.com/opendesktop/ocs-url
+URL: https://www.opencode.net/OCS/ocs-url
 
-#Source0: https://github.com/opendesktop/ocs-url/archive/release-%{version}.tar.gz
+#Source0: https://www.opencode.net/OCS/ocs-url/archive/release-%{version}.tar.gz
 Source0: %{name}.tar.gz
 
 Requires: libQt5Svg5 >= 5.2.0, libqt5-qtquickcontrols >= 5.2.0
 BuildRequires: git, make, automake, gcc, gcc-c++, libtool, libqt5-qtbase-devel >= 5.2.0, libqt5-qtsvg-devel >= 5.2.0, libqt5-qtdeclarative-devel >= 5.2.0, rpm-build
 
 %description
-An install helper program for items served on OpenCollaborationServices (OCS).
+An install helper program for items served via OpenCollaborationServices (ocs://).
 
 %prep
 #%%autosetup -n %{name}-release-%{version}
