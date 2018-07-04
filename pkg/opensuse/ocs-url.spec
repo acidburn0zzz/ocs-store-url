@@ -4,9 +4,9 @@ Version: 3.0.3
 Release: 1%{?dist}
 License: GPLv3+
 Group: Applications/Internet
-URL: https://github.com/opendesktop/ocs-url
+URL: https://www.opencode.net/OCS/ocs-url
 
-#Source0: https://github.com/opendesktop/ocs-url/archive/release-%{version}.tar.gz
+#Source0: https://www.opencode.net/OCS/ocs-url/archive/release-%{version}.tar.gz
 Source0: %{name}.tar.gz
 
 Requires: libQt5Svg5 >= 5.2.0, libqt5-qtquickcontrols >= 5.2.0
