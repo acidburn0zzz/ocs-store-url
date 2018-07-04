@@ -9,4 +9,4 @@ Package: ocs-url
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, libqt5svg5 (>= 5.2.0), qml-module-qtquick2 (>= 5.2.0) | qtdeclarative5-qtquick2-plugin (>= 5.2.0), qml-module-qtquick-window2 (>= 5.2.0) | qtdeclarative5-window-plugin (>= 5.2.0), qml-module-qtquick-controls (>= 5.2.0) | qtdeclarative5-controls-plugin (>= 5.2.0)
 Description: OCS-URL
- An install helper program for items served on OpenCollaborationServices (OCS).
+ An install helper program for items served via OpenCollaborationServices (ocs://).

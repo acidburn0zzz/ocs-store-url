@@ -5,7 +5,7 @@
     "organization": "Opendesktop.org",
     "domain": "org.opendesktop.ocs-url",
     "icon": ":/desktop/ocs-url.svg",
-    "description": "An install helper program for items served on OpenCollaborationServices (OCS).",
+    "description": "An install helper program for items served via OpenCollaborationServices (ocs://).",
     "license": "GPL-3+",
     "author": "Opendesktop.org",
     "contact": "contact@opendesktop.org",

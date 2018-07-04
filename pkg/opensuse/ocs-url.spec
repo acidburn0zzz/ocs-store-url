@@ -13,7 +13,7 @@ Requires: libQt5Svg5 >= 5.2.0, libqt5-qtquickcontrols >= 5.2.0
 BuildRequires: git, make, automake, gcc, gcc-c++, libtool, libqt5-qtbase-devel >= 5.2.0, libqt5-qtsvg-devel >= 5.2.0, libqt5-qtdeclarative-devel >= 5.2.0, rpm-build
 
 %description
-An install helper program for items served on OpenCollaborationServices (OCS).
+An install helper program for items served via OpenCollaborationServices (ocs://).
 
 %prep
 #%%autosetup -n %{name}-release-%{version}

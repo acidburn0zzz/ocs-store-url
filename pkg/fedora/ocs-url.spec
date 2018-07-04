@@ -13,7 +13,7 @@ Requires: qt5-qtbase >= 5.2.0, qt5-qtbase-gui >= 5.2.0, qt5-qtsvg >= 5.2.0, qt5-
 BuildRequires: git, make, automake, gcc, gcc-c++, libtool, qt5-qtbase-devel >= 5.2.0, qt5-qtsvg-devel >= 5.2.0, qt5-qtdeclarative-devel >= 5.2.0, rpm-build
 
 %description
-An install helper program for items served on OpenCollaborationServices (OCS).
+An install helper program for items served via OpenCollaborationServices (ocs://).
 
 %prep
 #%%autosetup -n %{name}-release-%{version}
