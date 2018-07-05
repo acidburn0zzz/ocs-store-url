@@ -1,6 +1,6 @@
 Summary: OCS-URL
 Name: ocs-url
-Version: 3.0.3
+Version: 3.1.0
 Release: 1%{?dist}
 License: GPLv3+
 Group: Applications/Internet
@@ -38,6 +38,10 @@ make INSTALL_ROOT="%{buildroot}" install
 rm -rf %{buildroot}
 
 %changelog
+* Thu Jul 05 2018 Akira Ohgaki <akiraohgaki@gmail.com> - 3.1.0-1
+- Drop old xdg:// and xdgs:// schemes
+- Update library
+
 * Tue Feb 06 2018 Akira Ohgaki <akiraohgaki@gmail.com> - 3.0.3-1
 - Update library
 - Fix spelling
