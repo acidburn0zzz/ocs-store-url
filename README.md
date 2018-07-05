@@ -10,7 +10,7 @@ License: GPL-3+
 
 Download Linux package from:
 
-https://www.linux-apps.com/p/1136805/
+https://www.opendesktop.org/p/1136805/
 
 And please check the ocs-url wiki for more information.
 
