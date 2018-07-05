@@ -85,6 +85,7 @@ ci_archlinux_pkg() { # docker-image: base/archlinux:latest
     pacman -Syu --noconfirm
     pacman -S --noconfirm curl git
     pacman -S --noconfirm base-devel qt5-base qt5-svg qt5-declarative qt5-quickcontrols
+    pacman -S --noconfirm pacman-contrib
 
     useradd -m ${PKGUSER}
     chown -R ${PKGUSER} "${PROJDIR}"
