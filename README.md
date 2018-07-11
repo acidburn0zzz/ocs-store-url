@@ -12,6 +12,4 @@ Download Linux package from:
 
 https://www.opendesktop.org/p/1136805/
 
-And please check the ocs-url wiki for more information.
-
-https://www.opencode.net/OCS/ocs-url/wiki
+And please see docs/* for more information.
