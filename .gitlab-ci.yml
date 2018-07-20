@@ -1,0 +1,42 @@
+stages:
+  - build
+
+ubuntu_deb:
+  stage: build
+  image: ubuntu:14.04
+  only:
+    - master
+    - /^release\-.+/
+  script:
+    - ./scripts/package ci_ubuntu_deb
+    - cat transfer.log
+
+fedora_rpm:
+  stage: build
+  image: fedora:20
+  only:
+    - master
+    - /^release\-.+/
+  script:
+    - ./scripts/package ci_fedora_rpm
+    - cat transfer.log
+
+opensuse_rpm:
+  stage: build
+  image: opensuse:42.1
+  only:
+    - master
+    - /^release\-.+/
+  script:
+    - ./scripts/package ci_opensuse_rpm
+    - cat transfer.log
+
+archlinux_pkg:
+  stage: build
+  image: base/archlinux:latest
+  only:
+    - master
+    - /^release\-.+/
+  script:
+    - ./scripts/package ci_archlinux_pkg
+    - cat transfer.log
