@@ -1,7 +1,7 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: ocs-url
 Upstream-Contact: Opendesktop.org <contact@opendesktop.org>
-Source: https://www.opencode.net/OCS/ocs-url
+Source: https://gitlab.opencode.net/OCS/ocs-url
 
 Files: *
 Copyright: 2016-2018, Opendesktop.org

@@ -4,9 +4,9 @@ Version: 3.1.0
 Release: 1%{?dist}
 License: GPLv3+
 Group: Applications/Internet
-URL: https://www.opencode.net/OCS/ocs-url
+URL: https://gitlab.opencode.net/OCS/ocs-url
 
-#Source0: https://www.opencode.net/OCS/ocs-url/archive/release-%{version}.tar.gz
+#Source0: https://gitlab.opencode.net/OCS/ocs-url/-/archive/release-%{version}/ocs-url-release-%{version}.tar.gz
 Source0: %{name}.tar.gz
 
 Requires: libQt5Svg5 >= 5.2.0, libqt5-qtquickcontrols >= 5.2.0
