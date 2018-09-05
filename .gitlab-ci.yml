@@ -1,11 +1,8 @@
 stages:
-  - build_ubuntu_deb
-  - build_fedora_rpm
-  - build_opensuse_rpm
-  - build_archlinux_pkg
+  - build
 
 ubuntu_deb:
-  stage: build_ubuntu_deb
+  stage: build
   image: ubuntu:14.04
   only:
     - master
@@ -15,7 +12,7 @@ ubuntu_deb:
     - cat transfer.log
 
 fedora_rpm:
-  stage: build_fedora_rpm
+  stage: build
   image: fedora:20
   only:
     - master
@@ -25,7 +22,7 @@ fedora_rpm:
     - cat transfer.log
 
 opensuse_rpm:
-  stage: build_opensuse_rpm
+  stage: build
   image: opensuse:42.1
   only:
     - master
@@ -35,7 +32,7 @@ opensuse_rpm:
     - cat transfer.log
 
 archlinux_pkg:
-  stage: build_archlinux_pkg
+  stage: build
   image: base/archlinux:latest
   only:
     - master
