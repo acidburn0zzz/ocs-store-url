@@ -112,7 +112,7 @@ add_pkguser() {
 
 export_srcarchive() {
     if [ "${1}" ]; then
-        log="$(cd "${PROJDIR}" && git archive --prefix="${PKGNAME}/" --output="${1}" HEAD)"
+        (cd "${PROJDIR}" && git archive --prefix="${PKGNAME}/" --output="${1}" HEAD)
     fi
 }
 
