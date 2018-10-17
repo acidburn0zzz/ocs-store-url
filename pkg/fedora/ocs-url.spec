@@ -4,9 +4,9 @@ Version: 3.1.0
 Release: 1%{?dist}
 License: GPLv3+
 Group: Applications/Internet
-URL: https://gitlab.opencode.net/OCS/ocs-url
+URL: https://git.opendesktop.org/OCS/ocs-url
 
-#Source0: https://gitlab.opencode.net/OCS/ocs-url/-/archive/release-%{version}/ocs-url-release-%{version}.tar.gz
+#Source0: https://git.opendesktop.org/OCS/ocs-url/-/archive/release-%{version}/ocs-url-release-%{version}.tar.gz
 Source0: %{name}.tar.gz
 
 Requires: qt5-qtbase >= 5.2.0, qt5-qtbase-gui >= 5.2.0, qt5-qtsvg >= 5.2.0, qt5-qtdeclarative >= 5.2.0, qt5-qtquickcontrols >= 5.2.0
