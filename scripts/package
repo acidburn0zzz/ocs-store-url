@@ -78,7 +78,7 @@ build_opensuse_rpm() {
     rpmbuild --define "_topdir ${BUILDDIR}" -bb "${BUILDDIR}/SPECS/${PKGNAME}.spec"
 }
 
-archlinux_pkg() { # docker-image: base/archlinux:latest
+archlinux_pkg() { # docker-image: archlinux/base:latest
     install_build_deps_archlinux_pkg
     add_pkguser
     su -c "export HOME=/home/${PKGUSER} && "${PKGSCRIPT}" build_archlinux_pkg" ${PKGUSER}

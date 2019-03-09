@@ -42,7 +42,7 @@ opensuse_rpm:
 
 archlinux_pkg:
   stage: build
-  image: base/archlinux:latest
+  image: archlinux/base:latest
   only:
     - master
     - /^release\-.+/
