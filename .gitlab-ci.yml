@@ -24,12 +24,12 @@ fedora_rpm:
     - ./scripts/package fedora_rpm
   artifacts:
     paths:
-    - build_*/ocs-url*.rpm
+    - build_*/RPMS/x86_64/ocs-url*.rpm
     expire_in: 2 days
 
 opensuse_rpm:
   stage: build
-  image: opensuse:42.1
+  image: opensuse:42.3
   only:
     - master
     - /^release\-.+/
@@ -37,7 +37,7 @@ opensuse_rpm:
     - ./scripts/package opensuse_rpm
   artifacts:
     paths:
-    - build_*/ocs-url*.rpm
+    - build_*/RPMS/x86_64/ocs-url*.rpm
     expire_in: 2 days
 
 archlinux_pkg:

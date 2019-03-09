@@ -55,7 +55,7 @@ build_fedora_rpm() {
     rpmbuild --define "_topdir ${BUILDDIR}" -bb "${BUILDDIR}/SPECS/${PKGNAME}.spec"
 }
 
-opensuse_rpm() { # docker-image: opensuse:42.1
+opensuse_rpm() { # docker-image: opensuse:42.3
     install_build_deps_opensuse_rpm
     add_pkguser
     su -c "export HOME=/home/${PKGUSER} && "${PKGSCRIPT}" build_opensuse_rpm" ${PKGUSER}
