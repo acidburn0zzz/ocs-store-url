@@ -9,7 +9,10 @@ ubuntu_deb:
     - /^release\-.+/
   script:
     - ./scripts/package ubuntu_deb
-    - cat transfer.log
+  artifacts:
+    paths:
+    - build_*/ocs-url*.deb
+    expire_in: 2 days
 
 fedora_rpm:
   stage: build
@@ -19,7 +22,10 @@ fedora_rpm:
     - /^release\-.+/
   script:
     - ./scripts/package fedora_rpm
-    - cat transfer.log
+  artifacts:
+    paths:
+    - build_*/ocs-url*.rpm
+    expire_in: 2 days
 
 opensuse_rpm:
   stage: build
@@ -29,7 +35,10 @@ opensuse_rpm:
     - /^release\-.+/
   script:
     - ./scripts/package opensuse_rpm
-    - cat transfer.log
+  artifacts:
+    paths:
+    - build_*/ocs-url*.rpm
+    expire_in: 2 days
 
 archlinux_pkg:
   stage: build
@@ -39,4 +48,7 @@ archlinux_pkg:
     - /^release\-.+/
   script:
     - ./scripts/package archlinux_pkg
-    - cat transfer.log
+  artifacts:
+    paths:
+    - build_*/ocs-url*.pkg.tar.xz
+    expire_in: 2 days
